@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Group Project</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="todo.css">
 </head>
-<body>
-    
+<body class="container">
+    <div id="new-user" class="jumbotron">
+        <h2 class="text-center">New User - Tasks</h2>
+        <form>
+            <div class="form-group row">
+                <label for="input-user-name" class="col-sm-2 col-form-label"><strong>Name</strong></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input-user-name" placeholder="Name">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0"><strong>User Status</strong></legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="user-parent" value="option1">
+                            <label class="form-check-label" for="user-parent">
+                                Parent User
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="user-child" value="option2">
+                            <label class="form-check-label" for="user-child">
+                                Child User
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="todo.js"></script>
+
 </body>
 </html>
