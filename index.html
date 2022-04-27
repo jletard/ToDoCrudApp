@@ -39,12 +39,28 @@
             </fieldset>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="button" class="btn btn-primary" id="sign-in">Sign in</button><!-- I changed the button type from "submit"to "button" and added an id - Aaron-->
                 </div>
             </div>
         </form>
         
     </div>
+    <!-- Aaron -->
+    <div class="jumbotron">
+        <!-- I did dark table because it was the only one with a border that would work with jumbotron -->
+        <table class="table table-bordered table-dark text-center">
+            <thead">
+              <tr>
+                <th class="col-2">Assigned User</th>
+                <th class="col-8">Task</th>
+                <th class="col-2">Completed</th>
+              </tr>
+            </thead>
+            <tbody id="master-table-body">
+            </tbody>
+        </table>
+    </div>    
+    <!-- Aaron -->
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
