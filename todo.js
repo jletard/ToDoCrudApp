@@ -11,7 +11,7 @@ class User {
 class Task {
     constructor(description, timeAssigned, dueTime) {
         this.description = description;
-        this.timeAssigned = timeAssigned; //TODO: grab system time at creation
+        this.timeAssigned = timeAssigned; //TODO: grab system time at creation  
         this.dueTime = dueTime;
         this.complete = false;  
     }
@@ -23,7 +23,7 @@ class UserService {
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
     static urlBase = 'https://crudcrud.com/api/';
     static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = urlBase + this.tempLib;
+    static url = this.urlBase + this.tempLib;
 
     static getAllUsers() {
         return $.get(this.url);
@@ -60,7 +60,7 @@ class TaskService {
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
     static urlBase = 'https://crudcrud.com/api/';
     static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = urlBase + this.tempLib;
+    static url = this.urlBase + this.tempLib;
 
     static getAllTasks() {
         return $.get(this.url);
@@ -103,15 +103,19 @@ class DOMManager{
             })
             .then((users) => this.render(users));
     }
+
+    // Derin - added few more lines to aarons render code to add in all the new task columns
     static render(users){
         this.users = users;
         $('#master-table-body').empty();
         for (let user of users){
             $('#master-table-body').append(
                 `<tr>
-                    <td id="${user._id}">${user.name}</td>
-                    <td>Task</td>
-                    <td id="${user._id}-check">
+                    <td id="${user.id}">${user.name}</td>
+                    <td>${user.task.description}</td>
+                    <td>${user.task.timeAssigned}</td>
+                    <td>${user.task.dueTime}</td>
+                    <td id="${user.id}-check">
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="">
                         </div>
@@ -137,3 +141,24 @@ $('#sign-in').click(function(){
         </tr> `);
 });
 // Aaron
+
+
+
+//Derin - Function to hide/show adult forms on radio click
+$('#adult-form').hide()
+$('input[type="radio"]').click(function(){
+    //show parent div when user-parent selected
+    console.log(this);
+    if($(this).attr('id') == 'user-parent')
+    {
+        $('#adult-form').show()
+    }
+    else
+    {
+        $('#adult-form').hide()
+    }
+    //else hid
+})
+
+console.log('file is working')
+
