@@ -90,6 +90,7 @@ class TaskService {
             type: 'DELETE'
         });
     }
+
 }
 
 // Aaron
