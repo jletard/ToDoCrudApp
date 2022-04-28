@@ -11,11 +11,16 @@ class User {
 class Task {
     constructor(description, timeAssigned, dueTime) {
         this.description = description;
-        this.timeAssigned = timeAssigned; //TODO: grab system time at creation
+        this.timeAssigned = timeAssigned; //TODO: grab system time at creation  
         this.dueTime = dueTime;
         this.complete = false;  
     }
 }
+
+//Derin - For time of creation for tasks: 
+// var dt = new Date();
+// var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+// document.write(time);
 
 
 class UserService {
@@ -103,15 +108,19 @@ class DOMManager{
             })
             .then((users) => this.render(users));
     }
+
+    // Derin - added few more lines to aarons render code to add in all the new task columns
     static render(users){
         this.users = users;
         $('#master-table-body').empty();
         for (let user of users){
             $('#master-table-body').append(
                 `<tr>
-                    <td id="${user._id}">${user.name}</td>
-                    <td>Task</td>
-                    <td id="${user._id}-check">
+                    <td id="${user.id}">${user.name}</td>
+                    <td>${user.task.description}</td>
+                    <td>${user.task.timeAssigned}</td>
+                    <td>${user.task.dueTime}</td>
+                    <td id="${user.id}-check">
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="">
                         </div>
