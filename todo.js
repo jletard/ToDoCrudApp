@@ -39,7 +39,7 @@ class UserService {
 
     static updateUser(user) {
         return $.ajax({
-            url: this.url + `/${user._id}`,
+            url: this.url + `/${user.id}`,
             dataType: 'json',
             data: JSON.stringify(user),
             contentType: 'application/json',
@@ -76,7 +76,7 @@ class TaskService {
 
     static updateTask(task) {
         return $.ajax({
-            url: this.url + `/${task._id}`,
+            url: this.url + `/${task.id}`,
             dataType: 'json',
             data: JSON.stringify(task),
             contentType: 'application/json',
