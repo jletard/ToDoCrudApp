@@ -17,18 +17,13 @@ class Task {
     }
 }
 
-//Derin - For time of creation for tasks: 
-// var dt = new Date();
-// var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-// document.write(time);
-
 
 class UserService {
     /*Crud Libraries are only good for 6 hours, update tempLib variable with your
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
     static urlBase = 'https://crudcrud.com/api/';
     static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = urlBase + this.tempLib;
+    static url = this.urlBase + this.tempLib;
 
     static getAllUsers() {
         return $.get(this.url);
@@ -65,7 +60,7 @@ class TaskService {
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
     static urlBase = 'https://crudcrud.com/api/';
     static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = urlBase + this.tempLib;
+    static url = this.urlBase + this.tempLib;
 
     static getAllTasks() {
         return $.get(this.url);
@@ -146,3 +141,24 @@ $('#sign-in').click(function(){
         </tr> `);
 });
 // Aaron
+
+
+
+//Derin - Function to hide/show adult forms on radio click
+$('#adult-form').hide()
+$('input[type="radio"]').click(function(){
+    //show parent div when user-parent selected
+    console.log(this);
+    if($(this).attr('id') == 'user-parent')
+    {
+        $('#adult-form').show()
+    }
+    else
+    {
+        $('#adult-form').hide()
+    }
+    //else hid
+})
+
+console.log('file is working')
+
