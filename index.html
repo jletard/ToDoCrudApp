@@ -43,13 +43,15 @@
                 <div class="form-group row" id="adult1">
                     <label for="dropdownMenuButton" class="col-sm-2 col-form-label" ><strong>Choose a Child</strong></label>
                     <div id="dropdown">
+                        <form class="form-inline">
+                            
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                              <option selected>Choose...</option>
+                              <option value="1">Johnny</option>
+                              <option value="2">Jimmy</option>
+                              <option value="3">Erika</option>
+                            </select>
                         
-                        <button class="btn btn-light dropdown-toggle form-control " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Choose a Child</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Jimmy</a> <!-- going to have to create a function to add each child into this when child user is created-->
-                            <a class="dropdown-item" href="#">Milton</a>
-                            <a class="dropdown-item" href="#">Carlos</a>
-                        </div>
                     </div>
                 </div>
 
