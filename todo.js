@@ -126,13 +126,19 @@ class DOMManager{
     }
 }
 // This is temporary and was used for testing the add user to the table.
+//Derin - added a few more rows to add in the Task description, Time assigned, time due, etc
 $('#sign-in').click(function(){
-    let user= $('#input-user-name').val();
+    let user= $('#inlineFormCustomSelectPref').html();
+    let task= $('#input-task-description').val();
+    let timestart=$('#input-task-time').val();
+    let timedue=$('#input-task-due-time').val();
     let masterTable = $('#master-table-body');
     masterTable.append(
         `<tr>
             <td>${user}</td>
-            <td>Task</td>
+            <td>${task}</td>
+            <td>${timestart}</td>
+            <td>${timedue}</td>
             <td>
                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="">
