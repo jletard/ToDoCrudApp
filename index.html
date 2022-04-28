@@ -41,9 +41,15 @@
             
             <div class="adultinput" id="adult-form">
                 <div class="form-group row" id="adult1">
-                    <label for="input-task-user" class="col-sm-2 col-form-label" ><strong>Assigned User</strong></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input-task-user" placeholder="Assigned User">
+                    <label for="dropdownMenuButton" class="col-sm-2 col-form-label" ><strong>Choose a Child</strong></label>
+                    <div id="dropdown">
+                        
+                        <button class="btn btn-light dropdown-toggle form-control " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Choose a Child</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Jimmy</a> <!-- going to have to create a function to add each child into this when child user is created-->
+                            <a class="dropdown-item" href="#">Milton</a>
+                            <a class="dropdown-item" href="#">Carlos</a>
+                        </div>
                     </div>
                 </div>
 
