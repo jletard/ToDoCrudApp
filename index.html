@@ -9,50 +9,29 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="todo.css">
 </head>
+
 <body class="container-fluid px-0">
-  <!-- Sarah- added accordion feature aand some styling-->   
-<div class="accordion" id="accordion">
-    <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-                <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <h2 class="text-center">Users</h2>
-                </button>
-            </h5>
-        </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-                <form>
+    <!-- Sarah- added accordion feature aand some styling-->
+    <div class="accordion" id="accordion">
+        <div class="card z-depth-0 bordered">
+            <div class="card-header text-center" id="headingZero">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <h2>Crud Init</h2>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
                     <div class="form-group row">
-                        <label for="input-user-name" class="col-sm-2 col-form-label"><strong>Name</strong></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-user-name" placeholder="Name">
-                        </div>
+                        <p>
+                            Enter the endpoint of your endpoint from the CrudCrud website first, then you can clear it with the Clear API button, or fill it with some sample data using the Fill API button. 
+                        </p>
                     </div>
-                    <fieldset class="form-group">
-                        <div class="row" id="user_form">
-                            <legend class="col-form-label col-sm-2 pt-0"><strong>User Type</strong></legend>
-                            <div class="col-sm-10">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gridRadios" value="adult"
-                                        id="user-parent" />
-                                    <label class="form-check-label" for="user-parent">
-                                        Parent User
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gridRadios" value="child" id="user-child"
-                                        checked>
-                                    <label class="form-check-label" for="user-child">
-                                        Child User
-                                    </label>
-                                </div>
-        
-                            </div>
-                    </fieldset>
                     <div class="form-group row">
-                        <label for="input-user-name" class="col-sm-2 col-form-label"><strong>Crud Endpoint</strong></label>
+                        <label for="api-endpoint" class="col-sm-2 col-form-label"><strong>Crud
+                                Endpoint</strong></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="api-endpoint" placeholder="Crud Endpoint">
                         </div>
@@ -60,94 +39,145 @@
                             <button type="button" class="btn btn-info btn-block" id="api-submit">Submit</button>
                         </div>
                     </div>
-        
-        
-                    <div class="adultinput" id="adult-form">
-                        <div class="form-group row" id="adult1">
-                            <label for="dropdownMenuButton" class="col-sm-2 col-form-label"><strong>Choose a
-                                    Child</strong></label>
-                            <div id="dropdown">
-                                <form class="form-inline">
-        
-                                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                                        <option selected>Choose...</option>
-                                        <option value="1">Johnny</option>
-                                        <option value="2">Jimmy</option>
-                                        <option value="3">Erika</option>
-                                    </select>
-        
-                            </div>
-                        </div>
-        
-                        <div class="form-group row" id="adult2">
-                            <label for="input-task-description" class="col-sm-2 col-form-label"><strong>Task
-                                    Description</strong></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-task-description" placeholder="Description">
-                            </div>
-                        </div>
-        
-                        <div class="form-group row" id="adult2">
-                            <label for="input-task-time" class="col-sm-2 col-form-label"><strong>Time Assigned</strong></label>
-                            <div class="col-sm-10">
-                                <input type="datetime-local" class="" id="input-task-time">
-                            </div>
-                        </div>
-        
-                        <div class="form-group row" id="adult3">
-                            <label for="input-due-time" class="col-sm-2 col-form-label"><strong>Time Due</strong></label>
-                            <div class="col-sm-10">
-                                <input type="datetime-local" class="" id="input-task-due-time">
-                            </div>
-                        </div>
-                    </div>
-        
                     <div class="form-group row">
-                        <div class="col">
-                            <button type="button" class="btn btn-info btn-block" id="sign-in">Add Task</button>
-                            <!-- I changed the button type from "submit"to "button" and added an id - Aaron-->
+                        <div class="col-sm">
+                            <button type="button" class="btn btn-info btn-block" id="clear-api">Clear API</button>
+                        </div>
+                        <div class="col-sm">
+                            <button type="button" class="btn btn-info btn-block" id="fill-api">Fill API</button>
                         </div>
                     </div>
-        
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card z-depth-0 bordered">
-        <div class="card-header text-center" id="headingTwo">
-            <h5 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="false" aria-controls="collapseTwo">
-                    <h2>Tasks</h2> 
-                </button>
-            </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-                <!-- Aaron -->
-    <!-- Derin- Took out Jumbotron class Div-->
-    <!-- I did dark table because it was the only one with a border that would work with jumbotron -->
-    <table class="table table-bordered table-dark text-center">
-        <thead">
-            <tr>
-                <th class="col-2">Assigned User</th>
-                <th class="col-4">Task Description</th>
-                <!--Derin - added 3 total task columns to table-->
-                <th class="col-2">Time Assigned</th>
-                <th class="col-2">Time Due</th>
-                <th class="col-2">Completed</th>
-            </tr>
-            </thead>
-            <tbody id="master-table-body">
-            </tbody>
-    </table>
+        <div class="card z-depth-0 bordered">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link btn-block" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h2 class="text-center">Users</h2>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="input-user-name" class="col-sm-2 col-form-label"><strong>Name</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-user-name" placeholder="Name">
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row" id="user_form">
+                                <legend class="col-form-label col-sm-2 pt-0"><strong>User Type</strong></legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" value="adult"
+                                            id="user-parent" />
+                                        <label class="form-check-label" for="user-parent">
+                                            Parent User
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" value="child"
+                                            id="user-child" checked>
+                                        <label class="form-check-label" for="user-child">
+                                            Child User
+                                        </label>
+                                    </div>
 
-    <!-- Aaron -->
+                                </div>
+                        </fieldset>
+                        <div class="adultinput" id="adult-form">
+                            <div class="form-group row" id="adult1">
+                                <label for="dropdownMenuButton" class="col-sm-2 col-form-label"><strong>Choose a
+                                        Child</strong></label>
+                                <div id="dropdown">
+                                    <form class="form-inline">
+
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">Johnny</option>
+                                            <option value="2">Jimmy</option>
+                                            <option value="3">Erika</option>
+                                        </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="adult2">
+                                <label for="input-task-description" class="col-sm-2 col-form-label"><strong>Task
+                                        Description</strong></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input-task-description"
+                                        placeholder="Description">
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="adult2">
+                                <label for="input-task-time" class="col-sm-2 col-form-label"><strong>Time
+                                        Assigned</strong></label>
+                                <div class="col-sm-10">
+                                    <input type="datetime-local" class="" id="input-task-time">
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="adult3">
+                                <label for="input-due-time" class="col-sm-2 col-form-label"><strong>Time
+                                        Due</strong></label>
+                                <div class="col-sm-10">
+                                    <input type="datetime-local" class="" id="input-task-due-time">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <button type="button" class="btn btn-info btn-block" id="sign-in">Add Task</button>
+                                <!-- I changed the button type from "submit"to "button" and added an id - Aaron-->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
- 
-        
+        <div class="card z-depth-0 bordered">
+            <div class="card-header text-center" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <h2>Tasks</h2>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <!-- Aaron -->
+                    <!-- Derin- Took out Jumbotron class Div-->
+                    <!-- I did dark table because it was the only one with a border that would work with jumbotron -->
+                    <table class="table table-bordered table-dark text-center">
+                        <thead">
+                            <tr>
+                                <th class="col-2">Assigned User</th>
+                                <th class="col-4">Task Description</th>
+                                <!--Derin - added 3 total task columns to table-->
+                                <th class="col-2">Time Assigned</th>
+                                <th class="col-2">Time Due</th>
+                                <th class="col-2">Completed</th>
+                            </tr>
+                            </thead>
+                            <tbody id="master-table-body">
+                            </tbody>
+                    </table>
+
+                    <!-- Aaron -->
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 
