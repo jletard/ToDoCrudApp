@@ -129,12 +129,16 @@ class DOMManager{
 }
 // This is temporary and was used for testing the add user to the table.
 //Derin - added a few more rows to add in the Task description, Time assigned, time due, etc
-$('#sign-in').click(function(){
+let masterTable = $('#master-table-body');
+let taskArray = [];
+
+$('#add-task').on('click',function(){
     let user= $('#inlineFormCustomSelectPref').html();
     let task= $('#input-task-description').val();
     let timestart=$('#input-task-time').val();
     let timedue=$('#input-task-due-time').val();
-    let masterTable = $('#master-table-body');
+    let newTask = new Task(task, timestart, timedue);
+    taskArray.push(newTask);
     masterTable.append(
         `<tr>
             <td>${user}</td>
@@ -147,14 +151,60 @@ $('#sign-in').click(function(){
                 </div>
             </td>
         </tr> `);
+        console.log(taskArray);
+        console.log(taskArray[0].description);
 });
+
+
+$('th').on('click',function(){
+    var column = $(this).data('column');
+    var order = $(this).data('order');
+    var text = $(this).html();
+    text = text.substring(0, text.length -1)
+
+    console.log('Column was clicked', column, order);
+    
+    if(order == 'desc'){
+        $(this).data('order', "asc");
+        // sort method
+        taskArray = taskArray.sort((a,b) => a[column] > b[column] ? 1:-1);
+        text += '&#9660';
+    }
+    else{
+        $(this).data('order', "desc");
+        taskArray = taskArray.sort((a,b) => a[column] < b[column] ? 1:-1);
+        text += '&#9650';
+    }
+    $(this).html(text);
+    buildTable(taskArray);
+});
+
+function buildTable(data){
+    masterTable.empty();
+    for (let i = 0; i < data.length; i++) {
+        // the User name rebuilds as i, since we don't have that working yet.
+        masterTable.append(`<tr>
+                        <td>${i}</td>
+                        <td>${data[i].description}</td>
+                        <td>${data[i].timeAssigned}</td>
+                        <td>${data[i].dueTime}</td>
+                        <td>
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                        </td>
+                    </tr> `
+        )
+        
+    } 
+}
 // Aaron
 
 
 
 //Derin - Function to hide/show adult forms on radio click
 $('#adult-form').hide()
-$('input[type="radio"]').click(function(){
+$('input[type="radio"]').on('click', function(){
     //show parent div when user-parent selected
     console.log(this);
     if($(this).attr('id') == 'user-parent')
