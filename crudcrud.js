@@ -1,8 +1,9 @@
 //John's API Populator
 
-currentTime= new Date().toLocaleString();
-dueDate ='06/01/2022, 12:00:00 PM';
+currentTime = new Date().toLocaleString();
+dueDate = '06/01/2022, 12:00:00 PM';
 
+user0 = new User('Unassigned', true);
 user1 = new User('Bob', true);
 user2 = new User('Cathy', true);
 user3 = new User('Jimmy', false);
@@ -31,14 +32,32 @@ user4.assignTask(task5);
 user5.assignTask(task6);
 user5.assignTask(task7);
 
-console.log(user1);
-console.log(user1.tasks);
 
-// var url
-// $('#api-submit').click(function(){
-//     endpoint= $('#api-endpoint').val();
-//     url = `https://crudcrud.com/api/${endpoint}`;
-//     $('#api-endpoint').val('');
-//     UserService.checkURL();
-//     UserService.createUser(user1);
-// });
+var url
+$('#api-submit').click(function () {
+    endpoint = $('#api-endpoint').val();
+    url = `https://crudcrud.com/api/${endpoint}/user1`;
+    $('#api-endpoint').val('');
+
+    getAllUsers();
+});
+
+$('#fill-api').click(function () {
+    console.log('Filling');
+    createUser(user0);
+    createUser(user1);
+    createUser(user2);
+    createUser(user3);
+    createUser(user4);
+    createUser(user5);
+    getAllUsers();
+});
+
+$('#clear-api').click(function () {
+    console.log('Clearing');
+    for (let i = 0; i < users.length; i++) {
+        deleteUser(users[i]._id);
+    }
+    
+    getAllUsers();
+});
