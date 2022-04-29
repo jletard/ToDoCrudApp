@@ -3,7 +3,7 @@
 currentTime = new Date().toLocaleString();
 dueDate = '06/01/2022, 12:00:00 PM';
 
-user0 = new User('Unassigned', true);
+user0 = new User('Unassigned', true); //assign every new task to user0
 user1 = new User('Bob', true);
 user2 = new User('Cathy', true);
 user3 = new User('Jimmy', false);
