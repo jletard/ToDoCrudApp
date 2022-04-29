@@ -6,6 +6,10 @@ class User {
         this.parent = parent;//boolean variable
         this.tasks = [];
     }
+
+    assignTask(task) {
+        this.tasks.push(task);
+    }
 }
 
 class Task {
@@ -21,9 +25,10 @@ class Task {
 class UserService {
     /*Crud Libraries are only good for 6 hours, update tempLib variable with your
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
-    static urlBase = 'https://crudcrud.com/api/';
-    static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = this.urlBase + this.tempLib;
+
+    static checkURL(){
+        console.log(url);
+    }
 
     static getAllUsers() {
         return $.get(this.url);
@@ -34,7 +39,7 @@ class UserService {
     }
 
     static createUser(user) {
-        return $.post(this.url, user);
+        return $.post(url, user);
     }
 
     static updateUser(user) {
@@ -58,9 +63,6 @@ class UserService {
 class TaskService {
     /*Crud Libraries are only good for 6 hours, update tempLib variable with your
     crud ID, can be copied off of dashboard screen at https://crudcrud.com */
-    static urlBase = 'https://crudcrud.com/api/';
-    static tempLib = '78e85992e0bf427784cf5781bb417ac6';
-    static url = this.urlBase + this.tempLib;
 
     static getAllTasks() {
         return $.get(this.url);
@@ -113,7 +115,7 @@ class DOMManager{
                 `<tr>
                     <td id="${user.id}">${user.name}</td>
                     <td>${user.task.description}</td>
-                    <td>${user.task.timeAssigned}</td>
+                    <td>${user.task.timeAssigned}</td>  
                     <td>${user.task.dueTime}</td>
                     <td id="${user.id}-check">
                         <div class="form-check">

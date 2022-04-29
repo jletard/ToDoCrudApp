@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <fieldset class="form-group">
-                        <div class="row">
+                        <div class="row" id="user_form">
                             <legend class="col-form-label col-sm-2 pt-0"><strong>User Type</strong></legend>
                             <div class="col-sm-10">
                                 <div class="form-check">
@@ -51,6 +51,15 @@
         
                             </div>
                     </fieldset>
+                    <div class="form-group row">
+                        <label for="input-user-name" class="col-sm-2 col-form-label"><strong>Crud Endpoint</strong></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="api-endpoint" placeholder="Crud Endpoint">
+                        </div>
+                        <div class="col-sm">
+                            <button type="button" class="btn btn-info btn-block" id="api-submit">Submit</button>
+                        </div>
+                    </div>
         
         
                     <div class="adultinput" id="adult-form">
