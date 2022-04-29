@@ -1,8 +1,12 @@
 Set up your directory like this:
 
 npm init
+
 npm i jquery
+
 nmp i bootstrap@4.4.1
+
+
 
 1. Create a full CRUD application of your choice. If you can use an existing API, use AJAX to interact with it. However, you do not have to use an API. If you do not use an API, store the entities you will create, read, update, and delete in an array.
 
