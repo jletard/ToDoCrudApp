@@ -43,11 +43,11 @@ function getAllUsers() {
     })
 }
 
-function deleteUser(id) {
-    fetch(url+`/${id}`, {
-        method: 'DELETE'
-    })
-}
+// function deleteUser(id) {
+//     fetch(url+`/${id}`, {
+//         method: 'DELETE'
+//     })
+// }
 
 function updateUser(user) {
     return $.ajax({
@@ -71,18 +71,27 @@ class DOMManager {
             .then((users) => this.render(users));
     }
 
+    // static addTask(id) {
+    //     for (let user of this.users) {
+    //         if (user._id == id) {
+    //             user.tasks.push(new Task)
+    //         }
+    //     }
+    // }
+
     // Derin - added few more lines to aarons render code to add in all the new task columns
     static render(users) {
         this.users = users;
         $('#master-table-body').empty();
+        //if (users.parent = true) Want to do this for parent users to render delete button ${user.parent == true}
         for (let user of users) {
             $('#master-table-body').append(
                 `<tr>
-                    <td id="${user.id}">${user.name}</td>
+                    <td id="${user._id}">${user.name}</td>
                     <td>${user.task.description}</td>
                     <td>${user.task.timeAssigned}</td>  
                     <td>${user.task.dueTime}</td>
-                    <td id="${user.id}-check">
+                    <td id="${user._id}-check">
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="">
                         </div>
@@ -92,6 +101,20 @@ class DOMManager {
         }
     }
 }
+
+// DOMManager.getAllUsers();
+
+// $('add-task').on('click', () => {
+//     let newTask = 
+// })
+
+
+
+
+
+
+
+
 // This is temporary and was used for testing the add user to the table.
 //Derin - added a few more rows to add in the Task description, Time assigned, time due, etc
 $('#sign-in').click(function () {
