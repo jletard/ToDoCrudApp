@@ -1,5 +1,3 @@
-/*setting super basic classes for User and Task to check API endpoints, 
-When proper classes are written feel free to replace */
 class User {
     constructor(name, parent) {
         this.name = name;
@@ -56,6 +54,7 @@ function getAllUsers() {
             console.log('success', data);
             users = data;
             drawDropDown();
+            buildTable();
             return users;
         })
 }
@@ -88,20 +87,13 @@ class DOMManager {
             .then((users) => this.render(users));
     }
 
-    // static addTask(id) {
-    //     for (let user of this.users) {
-    //         if (user._id == id) {
-    //             user.tasks.push(new Task)
-    //         }
-    //     }
-    // }
-
     // Derin - added few more lines to aarons render code to add in all the new task columns
     static render(users) {
         this.users = users;
         $('#master-table-body').empty();
         //if (users.parent = true) Want to do this for parent users to render delete button ${user.parent == true}
         for (let user of users) {
+            console.log('building task table');
             $('#master-table-body').append(
                 `<tr>
                     <td id="${user._id}">${user.name}</td>
@@ -183,16 +175,16 @@ $('#sort').on('click', function () {
         text += '&#9650';
     }
     $(this).html(text);
-    buildTable(taskArray);
+    buildTable();
 });
 
-function buildTable(data) {
+function buildTable() {
     masterTable.empty();
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].tasks.length; j++)
             // the User name rebuilds as i, since we don't have that working yet.
             masterTable.append(`<tr>
-                        <td>${i}</td>
+                        <td>${users[i].name}</td>
                         <td>${users[i].tasks[j].description}</td>
                         <td>${users[i].tasks[j].timeAssigned}</td>
                         <td>${users[i].tasks[j].dueTime}</td>
@@ -225,5 +217,4 @@ function buildTable(data) {
 //     //else hid
 // })
 
-console.log('file is working')
-
+console.log('file is working');
