@@ -158,7 +158,7 @@ $('#add-task').on('click', () => {
 // });
 
 
-$('th').on('click',function(){
+$('#sort').on('click',function(){
     var column = $(this).data('column');
     var order = $(this).data('order');
     var text = $(this).html();
