@@ -9,8 +9,12 @@ class User {
         this.tasks.push(task);
     }
 
-    deleteTask(task) {
-        this.tasks.splice(this.tasks.indexof(task), 1);
+    deleteTask(description) {
+        this.tasks.find(t => {
+            return t.description === description
+        })
+
+        
     }
 
 }
@@ -25,6 +29,8 @@ class Task {
 }
 
 let users = [];
+
+
 
 async function createUser(user) {
     await fetch(url, {
@@ -53,17 +59,65 @@ async function getAllUsers() {
             drawDropDown();
             buildTable();
             return users;
+            
         })
+        
+}
+
+// console.log(getAllUsers().users[0]);
+
+async function deleteTask(userid, description) {
+    const user= users.find(u => {
+        return u._id === userid;
+    });
+
+    if (user) {
+        console.log(JSON.stringify(users, null, 2));
+        
+        user.tasks = user.tasks.filter(t => {
+            
+            return t.description !== description
+        });
+        console.log(JSON.stringify(users, null, 2));
+        buildTable();
+    };
+    
+}
+
+async function updateCheck(userid, complete) {
+    const user= users.find(u => {
+        return u._id === userid;
+    });
+    // ${users[i]}-update-item
+    if(user.tasks.complete!==true){
+        console.log('checked');
+    };
+    if (user) {
+        console.log(JSON.stringify(users, null, 2));
+        user.tasks = user.tasks.find(t => {
+            complete = true;
+            return t.complete === complete
+
+        });
+    console.log("winner");
+    console.log(JSON.stringify(users, null, 2));
+    };
 }
 
 async function deleteUser(id) {
+    
     await fetch(url + `/${id}`, {
         method: 'DELETE'
     })
+
 }
 
+//addNewTask
+//url: crud + resource
+//POST CALL
+// body: {id, }
 async function updateUser(user) {
-    await fetch((`${url}/${user._id}`), {
+    await fetch((`${url}/${user._id}`), {  //CORS error here; wrong url
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -73,6 +127,7 @@ async function updateUser(user) {
     .then(response => response.json())
     .then(data => {
         console.log('SUCCESS', data);
+        
     })
     .catch((error) => {
         console.error('ERROR', error);
@@ -91,6 +146,7 @@ function drawDropDown() {
     }
     htmlCode += `</select>`;
     $("#user-dropdown").append(htmlCode);
+    
 }
 
 $('#create-user').on('click', function () {
@@ -121,6 +177,14 @@ $('#add-task').on('click', function () {
     users[userIndex].tasks.push(newTask);
     updateUser(users[userIndex]);    
     buildTable();
+    console.log(users[1].tasks[0]);
+});
+
+
+// $('.btn-danger').on('click', function() {
+//     //iterate through ALL of the delete buttons
+// })
+
 
     //The below code is handwaving, should be replaced with the user update and just drawing the table again.
     // taskArray.push(newTask);
@@ -139,7 +203,7 @@ $('#add-task').on('click', function () {
     //     </tr> `);
     // console.log(taskArray);
     // console.log(taskArray[0].description);
-});
+
 
 
 $('#sort').on('click', function () {
@@ -163,6 +227,7 @@ $('#sort').on('click', function () {
     }
     $(this).html(text);
     buildTable();
+    console.log(users[0].tasks[0].complete);
 });
 
 
@@ -170,24 +235,28 @@ $('#sort').on('click', function () {
 function buildTable() {
     masterTable.empty();
     for (let i = 0; i < users.length; i++) {
-        for (let j = 0; j < users[i].tasks.length; j++)
+        for (let j = 0; j < users[i].tasks.length; j++) {
             // the User name rebuilds as i, since we don't have that working yet.
-            masterTable.append(`<tr>
+            if (users[i].tasks[j]) {
+                masterTable.append(`<tr id="${i}-row">
                         <td>${users[i].name}</td>
                         <td>${users[i].tasks[j].description}</td>
                         <td>${users[i].tasks[j].timeAssigned}</td>
                         <td>${users[i].tasks[j].dueTime}</td>
                         <td>
                             <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <input class="form-check-input" type="checkbox" value=""><button class="btn btn-danger" onclick="${users[i]}.deleteTask(${users[i].tasks[j]})">Delete Task</button>
+                            <input class="form-check-input" type="checkbox" value="false" id="${users[i]}-update-item" onclick="updateCheck('${users[i]._id}', '${users[i].tasks[j].complete}')">
+                            <input class="form-check-input" type="checkbox" value="" id="${users[i]}-delete-button"><button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${users[i].tasks[j].description}')">Delete Task</button>
                             </div>
                         </td>
                     </tr> `
-            )
-
+                );
+            }
+        }
     }
+
 }
+
 // Aaron
 
 
@@ -207,3 +276,24 @@ function buildTable() {
 // })
 
 console.log('file is working');
+
+// function deleteTask(id){
+//     tempUsers = await fetch(url + `/${id}`, {
+//         method: 'DELETE'
+//     })
+   
+//     tempUsers.tasks.splice(j,1);
+//     updateUser(user_id);
+//     getAllUsers();
+// }
+///delete two vars
+// temp obj = get by id url(resource +id)
+
+// tempObj.tasks.splice(j,1) //there is other options!
+
+//update - pass user_id 
+
+//get all
+
+
+
