@@ -1,3 +1,6 @@
+var timeAssigned= new Date().toLocaleString();
+
+
 /*setting super basic classes for User and Task to check API endpoints, 
 When proper classes are written feel free to replace */
 class User {
@@ -43,11 +46,7 @@ function getAllUsers() {
     })
 }
 
-// function deleteUser(id) {
-//     fetch(url+`/${id}`, {
-//         method: 'DELETE'
-//     })
-// }
+
 
 function updateUser(user) {
     return $.ajax({
@@ -63,6 +62,8 @@ function updateUser(user) {
 // Aaron
 class DOMManager {
     static users;
+
+
     static createUser(user) {
         UserService.createUser(new User(name, parent))
             .then(() => {
@@ -71,13 +72,18 @@ class DOMManager {
             .then((users) => this.render(users));
     }
 
-    // static addTask(id) {
-    //     for (let user of this.users) {
-    //         if (user._id == id) {
-    //             user.tasks.push(new Task)
-    //         }
-    //     }
-    // }
+    static addTask(id) {
+        for (let user of this.users) {
+            if (user._id == id) {
+                user.tasks.push(new Task)($(`#input-task-description`).val(), timeAssigned);
+                updateUser().then(user)
+                    .then(() => {
+                        return getAllUsers();
+                    })
+                    .then((users) => this.render(users));
+            }
+        }
+    }
 
     // Derin - added few more lines to aarons render code to add in all the new task columns
     static render(users) {
@@ -87,10 +93,10 @@ class DOMManager {
         for (let user of users) {
             $('#master-table-body').append(
                 `<tr>
-                    <td id="${user._id}">${user.name}</td>
-                    <td>${user.task.description}</td>
-                    <td>${user.task.timeAssigned}</td>  
-                    <td>${user.task.dueTime}</td>
+                    <td id="name-${user._id}">${user.name}</td>
+                    <td id=${user.task.description}-task-description>${user.task.description}</td>
+                    <td id="${user.task.timeAssigned}-task-time">${user.task.timeAssigned}</td>  
+                    <td id="${user.task.dueTime}-task-due>${user.task.dueTime}</td>
                     <td id="${user._id}-check">
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="">
@@ -102,11 +108,19 @@ class DOMManager {
     }
 }
 
-// DOMManager.getAllUsers();
+getAllUsers();
 
-// $('add-task').on('click', () => {
-//     let newTask = 
-// })
+$('#add-task').on('click', () => {
+    
+    let newTask = 
+    {
+        description: $('#input-task-description').val(),
+        timeAssigned: currentTime,
+        dueTime: $('#input-task-due-time').val(),
+    }
+    console.log(newTask);
+    DOMManager.addTask(newTask);
+});
 
 
 
@@ -117,31 +131,31 @@ class DOMManager {
 
 // This is temporary and was used for testing the add user to the table.
 //Derin - added a few more rows to add in the Task description, Time assigned, time due, etc
-let masterTable = $('#master-table-body');
-let taskArray = [];
+// let masterTable = $('#master-table-body');
+// let taskArray = [];
 
-$('#add-task').on('click',function(){
-    let user= $('#inlineFormCustomSelectPref').html();
-    let task= $('#input-task-description').val();
-    let timestart=$('#input-task-time').val();
-    let timedue=$('#input-task-due-time').val();
-    let newTask = new Task(task, timestart, timedue);
-    taskArray.push(newTask);
-    masterTable.append(
-        `<tr>
-            <td>${user}</td>
-            <td>${task}</td>
-            <td>${timestart}</td>
-            <td>${timedue}</td>
-            <td>
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="">
-                </div>
-            </td>
-        </tr> `);
-        console.log(taskArray);
-        console.log(taskArray[0].description);
-});
+// $('#add-task').on('click',function(){
+//     let user= $('#inlineFormCustomSelectPref').html();
+//     let task= $('#input-task-description').val();
+//     let timestart=$('#input-task-time').val();
+//     let timedue=$('#input-task-due-time').val();
+//     let newTask = new Task(task, timestart, timedue);
+//     taskArray.push(newTask);
+//     masterTable.append(
+//         `<tr>
+//             <td>${user}</td>
+//             <td>${task}</td>
+//             <td>${timestart}</td>
+//             <td>${timedue}</td>
+//             <td>
+//                 <div class="form-check">
+//                 <input class="form-check-input" type="checkbox" value="">
+//                 </div>
+//             </td>
+//         </tr> `);
+//         console.log(taskArray);
+//         console.log(taskArray[0].description);
+// });
 
 
 $('th').on('click',function(){
