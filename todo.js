@@ -136,6 +136,7 @@ $('#add-task').on('click',function(){
             <td>
                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" value=""><button class="btn btn-danger" onclick="DOMManager.deleteTask('${user._id}', '${task._id}')">Delete Task</button>
                 </div>
             </td>
         </tr> `);
@@ -179,6 +180,7 @@ function buildTable(data){
                         <td>
                             <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="">
+                            <input class="form-check-input" type="checkbox" value=""><button class="btn btn-danger" onclick="DOMManager.deleteTask('${data._id}')">Delete Task</button>
                             </div>
                         </td>
                     </tr> `
