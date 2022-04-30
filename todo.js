@@ -175,19 +175,12 @@ $('#add-task').on('click', function () {
     timedue = timedue.toLocaleString('en-US', {hour12: true});
     let newTask = new Task(task, timestart, timedue);
     users[userIndex].tasks.push(newTask);
+    taskArray.push(newTask);
     updateUser(users[userIndex]);    
     buildTable();
-    console.log(users[1].tasks[0]);
-});
-
-
-// $('.btn-danger').on('click', function() {
-//     //iterate through ALL of the delete buttons
-// })
-
-
+    
     //The below code is handwaving, should be replaced with the user update and just drawing the table again.
-    // taskArray.push(newTask);
+    // 
     // masterTable.append(
     //     `<tr>
     //         <td>${user}</td>
@@ -217,12 +210,12 @@ $('#sort').on('click', function () {
     if (order == 'desc') {
         $(this).data('order', "asc");
         // sort method
-        taskArray = taskArray.sort((a, b) => a[column] > b[column] ? 1 : -1);
+        users = users.sort((a, b) => a[column] > b[column] ? 1 : -1);
         text += '&#9660';
     }
     else {
         $(this).data('order', "desc");
-        taskArray = taskArray.sort((a, b) => a[column] < b[column] ? 1 : -1);
+        users = users.sort((a, b) => a[column] < b[column] ? 1 : -1);
         text += '&#9650';
     }
     $(this).html(text);
@@ -294,6 +287,3 @@ console.log('file is working');
 //update - pass user_id 
 
 //get all
-
-
-
