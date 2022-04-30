@@ -66,42 +66,55 @@ async function getAllUsers() {
 
 // console.log(getAllUsers().users[0]);
 
-async function deleteTask(userid, description) {
-    const user= users.find(u => {
+// async function deleteTask(userid, description) {
+//     const user= users.find(u => {
+//         return u._id === userid;
+//     });
+
+//     if (user) {
+//         console.log(JSON.stringify(users, null, 2));
+        
+//         user.tasks = user.tasks.filter(t => {
+            
+//             return t.description !== description
+//         });
+//         console.log(JSON.stringify(users, null, 2));
+//         buildTable();
+//     };  
+// }
+async function deleteTask(userid, taskIndex) {
+    const user = users.find(u => {
         return u._id === userid;
     });
-
-    if (user) {
-        console.log(JSON.stringify(users, null, 2));
-        
-        user.tasks = user.tasks.filter(t => {
-            
-            return t.description !== description
-        });
-        console.log(JSON.stringify(users, null, 2));
-        buildTable();
-    };
-    
+    user.tasks.splice(taskIndex,1);
+    buildTable();
+    console.log(JSON.stringify(users, null, 2));
 }
 
-async function updateCheck(userid, complete) {
-    const user= users.find(u => {
+// async function updateCheck(userid, complete) {
+//     const user= users.find(u => {
+//         return u._id === userid;
+//     });
+//     // ${users[i]}-update-item
+//     if(user.tasks.complete!==true){
+//         console.log('checked');
+//     };
+//     if (user) {
+//         user.tasks = user.tasks.find(t => {
+//             complete = true;
+//             console.log(JSON.stringify(users, null, 2));
+//             return t.complete === complete
+        
+//         });
+//     };
+// }
+async function updateCheck(userid, taskIndex) {
+    const user = users.find(u => {
         return u._id === userid;
     });
-    // ${users[i]}-update-item
-    if(user.tasks.complete!==true){
-        console.log('checked');
-    };
-    if (user) {
-        console.log(JSON.stringify(users, null, 2));
-        user.tasks = user.tasks.find(t => {
-            complete = true;
-            return t.complete === complete
-
-        });
-    console.log("winner");
+    user.tasks[taskIndex].completed = true;
+    buildTable();
     console.log(JSON.stringify(users, null, 2));
-    };
 }
 
 async function deleteUser(id) {
@@ -176,7 +189,7 @@ $('#add-task').on('click', function () {
     let newTask = new Task(task, timestart, timedue);
     users[userIndex].tasks.push(newTask);
     taskArray.push(newTask);
-    updateUser(users[userIndex]);    
+    //updateUser(users[userIndex]);    
     buildTable();
 });
     //The below code is handwaving, should be replaced with the user update and just drawing the table again.
@@ -227,19 +240,28 @@ $('#sort').on('click', function () {
 //I think the delete button should go away, instead when the completed box is checked, the user should update.
 function buildTable() {
     masterTable.empty();
+    let complete ='';
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].tasks.length; j++) {
             // the User name rebuilds as i, since we don't have that working yet.
             if (users[i].tasks[j]) {
+                if (users[i].tasks[j].completed) {
+                    complete='yes'
+                } else {
+                    complete=''
+                }
                 masterTable.append(`<tr id="${i}-row">
                         <td>${users[i].name}</td>
                         <td>${users[i].tasks[j].description}</td>
                         <td>${users[i].tasks[j].timeAssigned}</td>
                         <td>${users[i].tasks[j].dueTime}</td>
+                        <td>${complete}</td>
                         <td>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="false" id="${users[i]}-update-item" onclick="updateCheck('${users[i]._id}', '${users[i].tasks[j].complete}')">
-                            <input class="form-check-input" type="checkbox" value="" id="${users[i]}-delete-button"><button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${users[i].tasks[j].description}')">Delete Task</button>
+                            <div>
+                                <!--<button class="btn btn-success" onclick="updateCheck('${users[i]._id}', '${users[i].tasks[j].complete}')">Complete Task</button>-->
+                                <button class="btn btn-success" onclick="updateCheck('${users[i]._id}', '${j}')">Complete Task</button>
+                                <!--<button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${users[i].tasks[j].description}')">Delete Task</button>-->
+                                <button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${j}')">Delete Task</button>
                             </div>
                         </td>
                     </tr> `
