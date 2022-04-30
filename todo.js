@@ -119,11 +119,12 @@ $('#add-task').on('click', function () {
     timedue = timedue.toLocaleString('en-US', {hour12: true});
     let newTask = new Task(task, timestart, timedue);
     users[userIndex].tasks.push(newTask);
+    taskArray.push(newTask);
     updateUser(users[userIndex]);    
     buildTable();
-
+    
     //The below code is handwaving, should be replaced with the user update and just drawing the table again.
-    // taskArray.push(newTask);
+    // 
     // masterTable.append(
     //     `<tr>
     //         <td>${user}</td>
@@ -153,12 +154,12 @@ $('#sort').on('click', function () {
     if (order == 'desc') {
         $(this).data('order', "asc");
         // sort method
-        taskArray = taskArray.sort((a, b) => a[column] > b[column] ? 1 : -1);
+        users = users.sort((a, b) => a[column] > b[column] ? 1 : -1);
         text += '&#9660';
     }
     else {
         $(this).data('order', "desc");
-        taskArray = taskArray.sort((a, b) => a[column] < b[column] ? 1 : -1);
+        users = users.sort((a, b) => a[column] < b[column] ? 1 : -1);
         text += '&#9650';
     }
     $(this).html(text);
@@ -171,7 +172,7 @@ function buildTable() {
     masterTable.empty();
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].tasks.length; j++)
-            // the User name rebuilds as i, since we don't have that working yet.
+            
             masterTable.append(`<tr>
                         <td>${users[i].name}</td>
                         <td>${users[i].tasks[j].description}</td>

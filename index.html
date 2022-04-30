@@ -158,12 +158,12 @@
                     <table class="table table-bordered table-dark text-center">
                         <thead">
                             <tr>
-                                <th class="col-2" data-column="user" data-order="desc">Assigned User</th>
-                                <th class="col-4" id = "sort" data-column="description" data-order="desc">Task Description &#9650</th>
+                                <th class="col-2" id = "sort" data-column="name" data-order="desc">Assigned User &#9660</th>
+                                <th class="col-4" data-column="description" data-order="desc">Task Description</th>
                                 <!--Derin - added 3 total task columns to table-->
-                                <th class="col-2">Time Assigned</th>
-                                <th class="col-2">Time Due</th>
-                                <th class="col-2">Completed</th>
+                                <th class="col-2" data-column="timeAssigned" data-order="desc">Time Assigned</th>
+                                <th class="col-2" data-column="dueTime" data-order="desc">Time Due</th>
+                                <th class="col-2" data-column="complete" data-order="desc">Completed</th>
                             </tr>
                             </thead>
                             <tbody id="master-table-body">
