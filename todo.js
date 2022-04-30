@@ -81,40 +81,6 @@ async function updateUser(user) {
 
 
 // Aaron
-// class DOMManager {
-//     static users;
-//     static createUser(user) {
-//         UserService.createUser(new User(name, parent))
-//             .then(() => {
-//                 return UserService.getAllUsers();
-//             })
-//             .then((users) => this.render(users));
-//     }
-
-//     // Derin - added few more lines to aarons render code to add in all the new task columns
-//     static render(users) {
-//         this.users = users;
-//         $('#master-table-body').empty();
-//         //if (users.parent = true) Want to do this for parent users to render delete button ${user.parent == true}
-//         for (let user of users) {
-//             console.log('building task table');
-//             $('#master-table-body').append(
-//                 `<tr>
-//                     <td id="${user._id}">${user.name}</td>
-//                     <td>${user.task.description}</td>
-//                     <td>${user.task.timeAssigned}</td>  
-//                     <td>${user.task.dueTime}</td>
-//                     <td id="${user._id}-check">
-//                         <div class="form-check">
-//                         <input class="form-check-input" type="checkbox" value="">
-//                         </div>
-//                     </td>
-//                 </tr> `
-//             );
-//         }
-//     }
-// }
-
 function drawDropDown() {
     $("#user-dropdown").empty();
     let htmlCode = `<select class="custom-select my-1 mr-sm-2" id="userDropDown">
@@ -126,6 +92,20 @@ function drawDropDown() {
     htmlCode += `</select>`;
     $("#user-dropdown").append(htmlCode);
 }
+
+$('#create-user').on('click', function () {
+    console.log('creating user')
+    let userName = $('#new-user-name').val();
+    let isParent = false;
+    if ($('#user-parent').prop('checked')) {
+        isParent = true;
+    }
+    let newUser = new User(userName, isParent);
+    createUser(newUser);
+    getAllUsers();
+    drawDropDown();
+    buildTable();
+});
 
 //Derin - added a few more rows to add in the Task description, Time assigned, time due, etc
 let masterTable = $('#master-table-body');
@@ -185,6 +165,8 @@ $('#sort').on('click', function () {
     buildTable();
 });
 
+
+//I think the delete button should go away, instead when the completed box is checked, the user should update.
 function buildTable() {
     masterTable.empty();
     for (let i = 0; i < users.length; i++) {

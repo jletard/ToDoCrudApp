@@ -22,6 +22,7 @@
                     </button>
                 </h5>
             </div>
+            <!-- Crud Accordion -->
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
                     <div class="form-group row">
@@ -60,12 +61,13 @@
                 </h5>
             </div>
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <!-- User Accordion -->
                 <div class="card-body">
                     <form>
                         <div class="form-group row">
                             <label for="new-user-name" class="col-sm-2 col-form-label"><strong>User Name</strong></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="api-endpoint" placeholder="Name">
+                                <input type="text" class="form-control" id="new-user-name" placeholder="Name">
                             </div>
                         </div>
                         <fieldset class="form-group">
@@ -93,8 +95,9 @@
 
                         <div class="form-group row">
                             <div class="col">
-                                <button type="button" class="btn btn-info btn-block" id="sign-in">Create User</button>
-                                <!-- I changed the button type from "submit"to "button" and added an id - Aaron-->
+                                <button type="button" class="btn btn-info btn-block" id="create-user">Create User</button>
+                                <!-- I changed the button type from "submit"to "button" and added an id - Aaron
+                                I changed it to Create User, John-->
                             </div>
                         </div>
 
@@ -116,6 +119,7 @@
                     <!-- Aaron -->
                     <!-- Derin- Took out Jumbotron class Div-->
                     <!-- I did dark table because it was the only one with a border that would work with jumbotron -->
+                    <!-- Task Accordion-->
                     <div class="adultinput" id="adult-form">
                         <div class="form-group row" id="adult1">
                             <label for="dropdownMenuButton" class="col-sm-2 col-form-label"><strong>Choose a
@@ -136,14 +140,6 @@
                                     placeholder="Description">
                             </div>
                         </div>
-
-                        <!-- <div class="form-group row" id="adult2">
-                            <label for="input-task-time" class="col-sm-2 col-form-label"><strong>Time
-                                    Assigned</strong></label>
-                            <div class="col-sm-10">
-                                <input type="datetime-local" class="" id="input-task-time">
-                            </div>
-                        </div> -->
 
                         <div class="form-group row" id="adult3">
                             <label for="input-due-time" class="col-sm-2 col-form-label"><strong>Time
