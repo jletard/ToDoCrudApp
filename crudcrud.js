@@ -3,7 +3,6 @@
 currentTime = new Date().toLocaleString();
 dueDate = '06/01/2022, 12:00:00 PM';
 
-user0 = new User('Unassigned', true); //assign every new task to user0
 user1 = new User('Bob', true);
 user2 = new User('Cathy', true);
 user3 = new User('Jimmy', false);
@@ -44,7 +43,6 @@ $('#api-submit').click(function () {
 
 $('#fill-api').click(function () {
     console.log('Filling');
-    createUser(user0);
     createUser(user1);
     createUser(user2);
     createUser(user3);
@@ -59,5 +57,6 @@ $('#clear-api').click(function () {
         deleteUser(users[i]._id);
     }
     
+    users = [];
     getAllUsers();
 });
