@@ -178,7 +178,7 @@ $('#add-task').on('click', function () {
     taskArray.push(newTask);
     updateUser(users[userIndex]);    
     buildTable();
-    
+});
     //The below code is handwaving, should be replaced with the user update and just drawing the table again.
     // 
     // masterTable.append(
