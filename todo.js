@@ -38,29 +38,33 @@ function createUser(user) {
     });
 }
 
+function drawDropDown() {
+    let htmlCode = `<select class="custom-select my-1 mr-sm-2" id="userDropDown">
+            `
+    for (let i = 0; i < users.length; i++) {
+        htmlCode += `<option value="${i}" id="user${i}">${users[i].name}</option>
+                `;
+    }
+    htmlCode += `</select>`;
+    $("#user-dropdown").append(htmlCode);
+}
+
 function getAllUsers() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log('success', data);
             users = data;
-            let htmlCode = `<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-            `
-            for (let i = 0; i < users.length; i++) {
-                htmlCode += `<option value="${i}">${users[i].name}</option>
-                `;
-            }
-            htmlCode += `</select>`;
-            $("#user-dropdown").append(htmlCode);
+            drawDropDown();
             return users;
         })
 }
 
-// function deleteUser(id) {
-//     fetch(url+`/${id}`, {
-//         method: 'DELETE'
-//     })
-// }
+function deleteUser(id) {
+    fetch(url + `/${id}`, {
+        method: 'DELETE'
+    })
+}
 
 function updateUser(user) {
     return $.ajax({
@@ -134,10 +138,11 @@ let masterTable = $('#master-table-body');
 let taskArray = [];
 
 $('#add-task').on('click', function () {
-    let user = $('#inlineFormCustomSelectPref').html();
+    let user = $('#userDropDown').find(":selected").text();
     let task = $('#input-task-description').val();
-    let timestart = $('#input-task-time').val();
+    let timestart = new Date().toLocaleString();
     let timedue = $('#input-task-due-time').val();
+    timedue = timedue.toLocaleString('en-US', {hour12: true});
     let newTask = new Task(task, timestart, timedue);
     taskArray.push(newTask);
     masterTable.append(
@@ -206,19 +211,19 @@ function buildTable(data) {
 
 
 
-//Derin - Function to hide/show adult forms on radio click
-$('#adult-form').hide()
-$('input[type="radio"]').on('click', function () {
-    //show parent div when user-parent selected
-    console.log(this);
-    if ($(this).attr('id') == 'user-parent') {
-        $('#adult-form').show()
-    }
-    else {
-        $('#adult-form').hide()
-    }
-    //else hid
-})
+// //Derin - Function to hide/show adult forms on radio click
+// $('#adult-form').hide()
+// $('input[type="radio"]').on('click', function () {
+//     //show parent div when user-parent selected
+//     console.log(this);
+//     if ($(this).attr('id') == 'user-parent') {
+//         $('#adult-form').show()
+//     }
+//     else {
+//         $('#adult-form').hide()
+//     }
+//     //else hid
+// })
 
 console.log('file is working')
 
