@@ -14,7 +14,6 @@ class User {
             return t.description === description
         })
     }
-
 }
 
 class Task {
@@ -87,7 +86,6 @@ async function deleteUser(id) {
 
 }
 
-
 function updateUser(user) {
     deleteUser(user._id);
     newUser=new User(user.name, user.parent);
@@ -96,7 +94,6 @@ function updateUser(user) {
     }
     createUser(newUser);
 }
-
 
 // Aaron
 function drawDropDown() {
@@ -109,8 +106,7 @@ function drawDropDown() {
                 `;
     }
     htmlCode += `</select>`;
-    $("#user-dropdown").append(htmlCode);
-    
+    $("#user-dropdown").append(htmlCode); 
 }
 
 $('#create-user').on('click', function () {
@@ -169,8 +165,6 @@ $('#sort').on('click', function () {
     console.log(users[0].tasks[0].complete);
 });
 
-
-
 function buildTable() {
     masterTable.empty();
     let complete ='';
@@ -191,9 +185,7 @@ function buildTable() {
                         <td>${complete}</td>
                         <td>
                             <div>
-                                <!--<button class="btn btn-success" onclick="updateCheck('${users[i]._id}', '${users[i].tasks[j].complete}')">Complete Task</button>-->
                                 <button class="btn btn-success" onclick="updateCheck('${users[i]._id}', '${j}')">Complete Task</button>
-                                <!--<button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${users[i].tasks[j].description}')">Delete Task</button>-->
                                 <button class="btn btn-danger" onclick="deleteTask('${users[i]._id}', '${j}')">Delete Task</button>
                             </div>
                         </td>
@@ -202,7 +194,6 @@ function buildTable() {
             }
         }
     }
-
 }
 
 console.log('file is working');
