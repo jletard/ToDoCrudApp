@@ -13,8 +13,6 @@ class User {
         this.tasks.find(t => {
             return t.description === description
         })
-
-        
     }
 
 }
