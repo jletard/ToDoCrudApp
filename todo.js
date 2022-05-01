@@ -22,14 +22,13 @@ class User {
 class Task {
     constructor(description, timeAssigned, dueTime) {
         this.description = description;
-        this.timeAssigned = timeAssigned; //TODO: grab system time at creation  
+        this.timeAssigned = timeAssigned;  
         this.dueTime = dueTime;
         this.complete = false;
     }
 }
 
 let users = [];
-
 
 
 async function createUser(user) {
@@ -57,31 +56,11 @@ async function getAllUsers() {
             console.log('success', data);
             users = data;
             drawDropDown();
-            buildTable();
-            return users;
-            
-        })
-        
+            buildTable();            
+        });
 }
 
-// console.log(getAllUsers().users[0]);
 
-// async function deleteTask(userid, description) {
-//     const user= users.find(u => {
-//         return u._id === userid;
-//     });
-
-//     if (user) {
-//         console.log(JSON.stringify(users, null, 2));
-        
-//         user.tasks = user.tasks.filter(t => {
-            
-//             return t.description !== description
-//         });
-//         console.log(JSON.stringify(users, null, 2));
-//         buildTable();
-//     };  
-// }
 async function deleteTask(userid, taskIndex) {
     const user = users.find(u => {
         return u._id === userid;
@@ -89,25 +68,9 @@ async function deleteTask(userid, taskIndex) {
     user.tasks.splice(taskIndex,1);
     buildTable();
     console.log(JSON.stringify(users, null, 2));
+    updateUser(user);
 }
 
-// async function updateCheck(userid, complete) {
-//     const user= users.find(u => {
-//         return u._id === userid;
-//     });
-//     // ${users[i]}-update-item
-//     if(user.tasks.complete!==true){
-//         console.log('checked');
-//     };
-//     if (user) {
-//         user.tasks = user.tasks.find(t => {
-//             complete = true;
-//             console.log(JSON.stringify(users, null, 2));
-//             return t.complete === complete
-        
-//         });
-//     };
-// }
 async function updateCheck(userid, taskIndex) {
     const user = users.find(u => {
         return u._id === userid;
@@ -115,41 +78,31 @@ async function updateCheck(userid, taskIndex) {
     user.tasks[taskIndex].completed = true;
     buildTable();
     console.log(JSON.stringify(users, null, 2));
+    updateUser(user);
 }
 
 async function deleteUser(id) {
     
     await fetch(url + `/${id}`, {
         method: 'DELETE'
-    })
+    });
 
 }
 
-//addNewTask
-//url: crud + resource
-//POST CALL
-// body: {id, }
-async function updateUser(user) {
-    await fetch((`${url}/${user._id}`), {  //CORS error here; wrong url
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('SUCCESS', data);
-        
-    })
-    .catch((error) => {
-        console.error('ERROR', error);
-    });
+
+function updateUser(user) {
+    deleteUser(user._id);
+    newUser=new User(user.name, user.parent);
+    for (let i=0; i<user.tasks.length; i++) {
+        newUser.assignTask(user.tasks[i]);
+    }
+    createUser(newUser);
 }
 
 
 // Aaron
 function drawDropDown() {
+    users.sort((a, b) => a.name.localeCompare(b.name));
     $("#user-dropdown").empty();
     let htmlCode = `<select class="custom-select my-1 mr-sm-2" id="userDropDown">
             `
@@ -189,27 +142,9 @@ $('#add-task').on('click', function () {
     let newTask = new Task(task, timestart, timedue);
     users[userIndex].tasks.push(newTask);
     taskArray.push(newTask);
-    //updateUser(users[userIndex]);    
+    updateUser(users[userIndex]);    
     buildTable();
 });
-    //The below code is handwaving, should be replaced with the user update and just drawing the table again.
-    // 
-    // masterTable.append(
-    //     `<tr>
-    //         <td>${user}</td>
-    //         <td>${task}</td>
-    //         <td>${timestart}</td>
-    //         <td>${timedue}</td>
-    //         <td>
-    //             <div class="form-check">
-    //             <input class="form-check-input" type="checkbox" value="">
-    //             <input class="form-check-input" type="checkbox" value=""><button class="btn btn-danger" onclick="${user}.deleteTask(${newTask})">Delete Task</button>
-    //             </div>
-    //         </td>
-    //     </tr> `);
-    // console.log(taskArray);
-    // console.log(taskArray[0].description);
-
 
 
 $('#sort').on('click', function () {
@@ -237,7 +172,7 @@ $('#sort').on('click', function () {
 });
 
 
-//I think the delete button should go away, instead when the completed box is checked, the user should update.
+
 function buildTable() {
     masterTable.empty();
     let complete ='';
@@ -272,40 +207,4 @@ function buildTable() {
 
 }
 
-// Aaron
-
-
-
-// //Derin - Function to hide/show adult forms on radio click
-// $('#adult-form').hide()
-// $('input[type="radio"]').on('click', function () {
-//     //show parent div when user-parent selected
-//     console.log(this);
-//     if ($(this).attr('id') == 'user-parent') {
-//         $('#adult-form').show()
-//     }
-//     else {
-//         $('#adult-form').hide()
-//     }
-//     //else hid
-// })
-
 console.log('file is working');
-
-// function deleteTask(id){
-//     tempUsers = await fetch(url + `/${id}`, {
-//         method: 'DELETE'
-//     })
-   
-//     tempUsers.tasks.splice(j,1);
-//     updateUser(user_id);
-//     getAllUsers();
-// }
-///delete two vars
-// temp obj = get by id url(resource +id)
-
-// tempObj.tasks.splice(j,1) //there is other options!
-
-//update - pass user_id 
-
-//get all
